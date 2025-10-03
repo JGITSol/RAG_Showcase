@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv
+.env*
+.venv*
+*.egg-info/
+*.egg
+
+# VSCode
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+reranker_raw_failures.log
+
+# Benchmarks & results
+bench/*.json
+bench/*.ndjson
+bench/*.csv
+bench/*.tsv
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Node.js
+node_modules/
+
+# Misc
+*.bak
+*.swp
+*.tmp
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Ignore model artifacts
+*.bin
+*.pt
+*.onnx
+
+# Ignore test outputs
+*.coverage
+htmlcov/
+
+# Ignore secrets
+secrets.*
+
+# Ignore HiveRAG artifacts
+Hive/hive-rag-system.zip.zip
+SingleAgent/sota-rag-agent.zip.zip
+
+# Ignore ollama cache
+ollama/

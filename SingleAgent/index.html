@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOTA RAG Knowledge Retriever Agent</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-brain"></i>
+                    <h1>SOTA RAG Agent</h1>
+                </div>
+                <div class="status-indicators">
+                    <div class="status-item">
+                        <i class="fas fa-server"></i>
+                        <span>Ollama Connected</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-database"></i>
+                        <span>Vector DB Ready</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="dashboard-grid">
+                <!-- Query Section -->
+                <section class="query-section card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-search"></i> Query Interface</h2>
+                    </div>
+                    <div class="query-form">
+                        <textarea id="queryInput" placeholder="Enter your query here..." rows="3"></textarea>
+                        <div class="query-options">
+                            <div class="method-selector">
+                                <button class="method-btn active" data-method="crag">
+                                    <i class="fas fa-shield-alt"></i>
+                                    CRAG
+                                </button>
+                                <button class="method-btn" data-method="selfRag">
+                                    <i class="fas fa-sync-alt"></i>
+                                    Self-RAG
+                                </button>
+                                <button class="method-btn" data-method="deepRag">
+                                    <i class="fas fa-project-diagram"></i>
+                                    DeepRAG
+                                </button>
+                            </div>
+                            <button class="btn btn--primary" id="queryBtn">
+                                <i class="fas fa-play"></i>
+                                Execute Query
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RAG Method Details -->
+                <section class="method-details card">
+                    <div class="method-tabs">
+                        <div class="tab active" data-tab="crag">
+                            <i class="fas fa-shield-alt"></i>
+                            Corrective RAG
+                        </div>
+                        <div class="tab" data-tab="selfRag">
+                            <i class="fas fa-sync-alt"></i>
+                            Self-RAG
+                        </div>
+                        <div class="tab" data-tab="deepRag">
+                            <i class="fas fa-project-diagram"></i>
+                            Deep RAG
+                        </div>
+                    </div>
+
+                    <!-- CRAG Tab Content -->
+                    <div class="tab-content active" id="crag-content">
+                        <div class="method-info">
+                            <h3>Corrective RAG (CRAG)</h3>
+                            <p>Robust retrieval with error correction and quality assessment</p>
+                            <div class="method-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Accuracy</span>
+                                    <span class="stat-value">51%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Improvement</span>
+                                    <span class="stat-value">Up to 320%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-flow">
+                            <div class="process-step">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Document Evaluation</span>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <i class="fas fa-globe"></i>
+                                <span>Web Search Fallback</span>
+                                <div class="status-indicator ready"></div>
+                            </div>
+                            <div class="process-step">
+                                <i class="fas fa-check-double"></i>
+                                <span>Self-Correction</span>
+                                <div class="status-indicator ready"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Self-RAG Tab Content -->
+                    <div class="tab-content" id="selfRag-content">
+                        <div class="method-info">
+                            <h3>Self-RAG</h3>
+                            <p>Adaptive retrieval with reflection tokens and critique mechanism</p>
+                            <div class="method-stats">
+                                <div class="stat">
+                                    <span class="stat-label">PopQA Improvement</span>
+                                    <span class="stat-value">320%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">ARC-Challenge</span>
+                                    <span class="stat-value">208%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reflection-tokens">
+                            <h4>Reflection Tokens</h4>
+                            <div class="token-list">
+                                <span class="token retrieve">[Retrieve]</span>
+                                <span class="token no-retrieve">[No Retrieve]</span>
+                                <span class="token relevant">[Relevant]</span>
+                                <span class="token partial">[Partially Relevant]</span>
+                                <span class="token irrelevant">[Irrelevant]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DeepRAG Tab Content -->
+                    <div class="tab-content" id="deepRag-content">
+                        <div class="method-info">
+                            <h3>Deep RAG</h3>
+                            <p>Complex multi-step reasoning with strategic retrieval decisions</p>
+                            <div class="method-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Reasoning Tasks</span>
+                                    <span class="stat-value">8-15% boost</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Optimization</span>
+                                    <span class="stat-value">End-to-end</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reasoning-chain">
+                            <h4>Decision Process</h4>
+                            <div class="chain-steps">
+                                <div class="chain-step">1. Initial Analysis</div>
+                                <div class="chain-arrow">→</div>
+                                <div class="chain-step">2. Strategic Retrieval</div>
+                                <div class="chain-arrow">→</div>
+                                <div class="chain-step">3. Reasoning Integration</div>
+                                <div class="chain-arrow">→</div>
+                                <div class="chain-step">4. Final Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Performance Analytics -->
+                <section class="analytics-section card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Performance Analytics</h2>
+                    </div>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Knowledge Base Stats -->
+                <section class="kb-section card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-database"></i> Knowledge Base</h2>
+                    </div>
+                    <div class="kb-stats">
+                        <div class="kb-stat">
+                            <i class="fas fa-file-text"></i>
+                            <div>
+                                <span class="kb-number">1,250</span>
+                                <span class="kb-label">Documents</span>
+                            </div>
+                        </div>
+                        <div class="kb-stat">
+                            <i class="fas fa-cube"></i>
+                            <div>
+                                <span class="kb-number">15,600</span>
+                                <span class="kb-label">Chunks</span>
+                            </div>
+                        </div>
+                        <div class="kb-stat">
+                            <i class="fas fa-vector-square"></i>
+                            <div>
+                                <span class="kb-number">768</span>
+                                <span class="kb-label">Dimensions</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kb-model">
+                        <span class="model-name">nomic-embed-text</span>
+                        <span class="model-status">Active</span>
+                    </div>
+                </section>
+
+                <!-- Query Results -->
+                <section class="results-section card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-comments"></i> Query Results</h2>
+                    </div>
+                    <div id="results-container" class="results-container">
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <p>Execute a query to see results</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Panel -->
+                <section class="settings-section card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cog"></i> Configuration</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <label>Ollama Model</label>
+                            <select class="form-control">
+                                <option>llama3.1:8b</option>
+                                <option>llama3.1:70b</option>
+                                <option>mistral:7b</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label>Temperature</label>
+                            <input type="range" min="0" max="1" step="0.1" value="0.1" class="range-input">
+                            <span class="range-value">0.1</span>
+                        </div>
+                        <div class="setting-group">
+                            <label>Context Length</label>
+                            <select class="form-control">
+                                <option>2048</option>
+                                <option selected>4096</option>
+                                <option>8192</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Processing Modal -->
+        <div class="modal hidden" id="processingModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="processing-animation">
+                    <div class="spinner"></div>
+                    <h3 id="processingText">Processing Query...</h3>
+                    <p id="processingDetail">Initializing RAG pipeline</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

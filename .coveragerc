@@ -1,0 +1,23 @@
+[run]
+omit =
+    */test_*.py
+    tests/test_*.py
+    Hive/script*.py
+    Hive/*test*.py
+    Hive/*_script.py
+    SingleAgent/script*.py
+    SingleAgent/*test*.py
+    SingleAgent/*_script.py
+    */*_script.py
+    */chart_script.py
+
+[report]
+exclude_lines =
+    if __name__ == "__main__":
+        # pragma: no cover
+    pragma: no cover
+
+[paths]
+source =
+    .
+

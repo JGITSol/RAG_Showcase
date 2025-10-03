@@ -1,0 +1,17 @@
+# Core runtime dependencies for RAG_Showcase
+numpy
+chromadb
+langchain
+ollama
+sentence-transformers
+networkx
+requests
+
+# Optional / commonly used
+
+uvicorn
+
+# Testing and CI
+pytest
+pytest-asyncio
+coverage

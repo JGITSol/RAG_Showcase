@@ -1,0 +1,15 @@
+{
+  "ollama": {
+    "base_url": "http://localhost:11434",
+    "primary_model": "gemma3:latest",
+    "embedding_model": "snowflake-arctic-embed2:latest",
+    "reranker_model": "xitao/bge-reranker-v2-m3:latest",
+    "token_window": 4096
+  },
+  "vector_db": {
+    "persist_directory": "./hiverag_db",
+    "collection_name": "hive_knowledge",
+    "chunk_size": 512,
+    "chunk_overlap": 50
+  }
+}

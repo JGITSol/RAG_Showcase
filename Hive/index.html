@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveRAG - Multi-Agent RAG System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="hive-icon">
+                        <i class="fas fa-hexagon"></i>
+                        <div class="pulse-ring"></div>
+                    </div>
+                    <div class="logo-text">
+                        <h1>HiveRAG</h1>
+                        <span class="tagline">Multi-Agent Knowledge Hive</span>
+                    </div>
+                </div>
+                <div class="system-status">
+                    <div class="status-card">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <span class="status-number" id="activeAgents">6</span>
+                            <span class="status-label">Active Agents</span>
+                        </div>
+                    </div>
+                    <div class="status-card">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <span class="status-number" id="ensembleAccuracy">92.4%</span>
+                            <span class="status-label">Ensemble Accuracy</span>
+                        </div>
+                    </div>
+                    <div class="status-card">
+                        <i class="fas fa-memory"></i>
+                        <div>
+                            <span class="status-number" id="contextUsage">1.2M</span>
+                            <span class="status-label">Context Tokens</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <div class="dashboard-grid">
+                <!-- Agent Hive Visualization -->
+                <section class="hive-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-sitemap"></i> Agent Hive Structure</h2>
+                        <div class="hive-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-crown"></i>
+                                <span id="queenAgents">2</span> Queens
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-hammer"></i>
+                                <span id="workerAgents">4</span> Workers
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-search-location"></i>
+                                <span id="scoutAgents">3</span> Scouts
+                            </span>
+                        </div>
+                    </div>
+                    <div class="hive-container" id="hiveVisualization">
+                        <!-- Agent nodes will be dynamically generated -->
+                    </div>
+                </section>
+
+                <!-- Multi-Method RAG Interface -->
+                <section class="rag-interface">
+                    <div class="section-header">
+                        <h2><i class="fas fa-robot"></i> Multi-Method RAG Interface</h2>
+                    </div>
+                    <div class="query-section">
+                        <div class="query-input-container">
+                            <textarea id="queryInput" placeholder="Enter your query to engage the hive intelligence..." rows="3"></textarea>
+                            <div class="query-complexity" id="queryComplexity">
+                                <span class="complexity-label">Query Complexity:</span>
+                                <div class="complexity-bar">
+                                    <div class="complexity-fill" id="complexityFill"></div>
+                                </div>
+                                <span class="complexity-value" id="complexityValue">Medium</span>
+                            </div>
+                        </div>
+                        <div class="method-tabs">
+                            <button class="method-tab active" data-method="ensemble">
+                                <i class="fas fa-layer-group"></i>
+                                <span>Ensemble</span>
+                            </button>
+                            <button class="method-tab" data-method="crag">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>CRAG</span>
+                            </button>
+                            <button class="method-tab" data-method="selfrag">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Self-RAG</span>
+                            </button>
+                            <button class="method-tab" data-method="deeprag">
+                                <i class="fas fa-project-diagram"></i>
+                                <span>Deep RAG</span>
+                            </button>
+                        </div>
+                        <button class="execute-btn" id="executeQuery">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Deploy Agents</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Performance Analytics -->
+                <section class="performance-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Performance Analytics</h2>
+                    </div>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="method-performance">
+                        <div class="method-stat">
+                            <span class="method-name">CRAG</span>
+                            <span class="method-score">51% benchmark</span>
+                            <div class="method-bar">
+                                <div class="bar-fill" style="width: 51%"></div>
+                            </div>
+                        </div>
+                        <div class="method-stat">
+                            <span class="method-name">Self-RAG</span>
+                            <span class="method-score">320% PopQA</span>
+                            <div class="method-bar">
+                                <div class="bar-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="method-stat">
+                            <span class="method-name">Deep RAG</span>
+                            <span class="method-score">8-15% reasoning</span>
+                            <div class="method-bar">
+                                <div class="bar-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Long Context Management -->
+                <section class="context-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-memory"></i> Long Context Management</h2>
+                    </div>
+                    <div class="context-overview">
+                        <div class="context-bar">
+                            <div class="context-used" id="contextUsed"></div>
+                            <div class="context-label">1.2M / 2M tokens</div>
+                        </div>
+                    </div>
+                    <div class="context-allocation" id="contextAllocation">
+                        <!-- Dynamic context segments -->
+                    </div>
+                </section>
+
+                <!-- Agent Communication Panel -->
+                <section class="communication-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-comments"></i> Agent Communication</h2>
+                        <div class="communication-stats">
+                            <span class="comm-stat">
+                                <i class="fas fa-exchange-alt"></i>
+                                <span id="messageCount">247</span> messages/min
+                            </span>
+                        </div>
+                    </div>
+                    <div class="communication-flow" id="communicationFlow">
+                        <!-- Dynamic communication messages -->
+                    </div>
+                </section>
+
+                <!-- Query Processing Workflow -->
+                <section class="workflow-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-route"></i> Processing Workflow</h2>
+                    </div>
+                    <div class="workflow-steps" id="workflowSteps">
+                        <div class="workflow-step" data-step="1">
+                            <div class="step-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Query Analysis</h4>
+                                <p>Complexity assessment & routing</p>
+                            </div>
+                            <div class="step-status idle"></div>
+                        </div>
+                        <div class="workflow-step" data-step="2">
+                            <div class="step-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Agent Assignment</h4>
+                                <p>Dynamic agent allocation</p>
+                            </div>
+                            <div class="step-status idle"></div>
+                        </div>
+                        <div class="workflow-step" data-step="3">
+                            <div class="step-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Parallel Processing</h4>
+                                <p>Multi-agent execution</p>
+                            </div>
+                            <div class="step-status idle"></div>
+                        </div>
+                        <div class="workflow-step" data-step="4">
+                            <div class="step-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>Result Synthesis</h4>
+                                <p>Ensemble aggregation</p>
+                            </div>
+                            <div class="step-status idle"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Query Results -->
+                <section class="results-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-lightbulb"></i> Query Results</h2>
+                    </div>
+                    <div class="results-container" id="resultsContainer">
+                        <div class="empty-state">
+                            <div class="empty-icon">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <h3>Deploy agents to see results</h3>
+                            <p>Enter a query above to engage the hive intelligence</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Processing Modal -->
+        <div class="modal hidden" id="processingModal">
+            <div class="modal-backdrop"></div>
+            <div class="modal-content">
+                <div class="hive-processing">
+                    <div class="hexagon-spinner">
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                    </div>
+                    <h3 id="processingTitle">Hive Mind Activated</h3>
+                    <p id="processingMessage">Coordinating agent swarm...</p>
+                    <div class="processing-agents" id="processingAgents">
+                        <!-- Dynamic agent status -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
